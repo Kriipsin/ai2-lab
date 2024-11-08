@@ -1,0 +1,60 @@
+App\Entity\Location:
+  properties:
+    city:
+      - NotBlank:
+          message: 'City cannot be blank'
+          groups: ['create', 'edit']
+    country:
+      - NotBlank:
+          groups: ['create', 'edit']
+      - Length:
+          min: 2
+          max: 2
+          groups: ['create', 'edit']
+    latitude:
+        - NotBlank:
+            groups: ['create', 'edit']
+        - LessThanOrEqual:
+            value: 90
+            message: 'Latitude cannot exceed 90°'
+            groups: ['create', 'edit']
+        - GreaterThanOrEqual:
+            value: -90
+            message: 'Latitude cannot be less than -90°'
+            groups: ['create', 'edit']
+    longitude:
+        - NotBlank:
+            groups: ['create', 'edit']
+        - LessThanOrEqual:
+            value: 180
+            message: 'Longitude cannot exceed 180°'
+            groups: ['create', 'edit']
+        - GreaterThanOrEqual:
+            value: -180
+            message: 'Longitude cannot be less than -180°'
+            groups: ['create', 'edit']
+
+App\Entity\Measurement:
+  properties:
+    date:
+      - NotBlank:
+          groups: ['create', 'edit']
+      - Type:
+            type: 'DateTime'
+            message: 'Date must be a valid date'
+            groups: ['create', 'edit']
+      - GreaterThanOrEqual:
+            value: 'today'
+            message: 'Date cannot be in the past'
+            groups: ['create', 'edit']
+    celsius:
+      - NotBlank:
+          groups: ['create', 'edit']
+      - LessThanOrEqual:
+          value: 55
+          message: 'Temperature cannot exceed 55°C'
+          groups: ['create', 'edit']
+      - GreaterThanOrEqual:
+            value: -30
+            message: 'Temperature cannot be less than -30°C'
+            groups: ['create', 'edit']
