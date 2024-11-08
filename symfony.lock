@@ -116,7 +116,7 @@
             "repo": "github.com/symfony/recipes",
             "branch": "main",
             "version": "4.3",
-            "ref": "df66ee1f226c46f01e85c29c2f7acce0596ba35a"
+            "ref": "09051cfde49476e3c12cd3a0e44289ace1c75a4f"
         },
         "files": [
             "./config/packages/mailer.yaml"
@@ -208,7 +208,7 @@
         ]
     },
     "symfony/stimulus-bundle": {
-        "version": "2.20",
+        "version": "2.21",
         "recipe": {
             "repo": "github.com/symfony/recipes",
             "branch": "main",
@@ -248,7 +248,7 @@
         ]
     },
     "symfony/ux-turbo": {
-        "version": "v2.20.0"
+        "version": "v2.21.0"
     },
     "symfony/validator": {
         "version": "6.3",

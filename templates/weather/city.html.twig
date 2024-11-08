@@ -8,14 +8,10 @@
 {% block body %}
     <main>
         <h1>Weather in {{ location.city }}, {{ location.country }}</h1>
-{#        <pre>#}
-{#            {{dump(location)}}#}
-{#        </pre>#}
+
         <ul>
-            {% for measurement in weatherData %}
-                <li>{{ measurement.measurementDate|date('d.m.Y') }}: {{ measurement.temperatureC }}&deg;C</li>
-            {% else %}
-                <text>No measurements available</text>
+            {% for measurement in measurements %}
+                <li>{{ measurement.date|date('d.m.Y') }}: {{ measurement.celsius }}&deg;C</li>
             {% endfor %}
         </ul>
     </main>

@@ -28,12 +28,12 @@ class Location
     #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 7)]
     private ?string $longitude = null;
 
-    #[ORM\OneToMany(targetEntity: WeatherData::class, mappedBy: 'location')]
-    private Collection $weatherData;
+    #[ORM\OneToMany(targetEntity: Measurement::class, mappedBy: 'location')]
+    private Collection $measurements;
 
     public function __construct()
     {
-        $this->weatherData = new ArrayCollection();
+        $this->measurements = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -90,29 +90,29 @@ class Location
     }
 
     /**
-     * @return Collection<int, WeatherData>
+     * @return Collection<int, Measurement>
      */
-    public function getWeatherData(): Collection
+    public function getMeasurements(): Collection
     {
-        return $this->weatherData;
+        return $this->measurements;
     }
 
-    public function addWeatherData(WeatherData $weatherData): static
+    public function addMeasurement(Measurement $measurement): static
     {
-        if (!$this->weatherData->contains($weatherData)) {
-            $this->weatherData->add($weatherData);
-            $weatherData->setLocation($this);
+        if (!$this->measurements->contains($measurement)) {
+            $this->measurements->add($measurement);
+            $measurement->setLocation($this);
         }
 
         return $this;
     }
 
-    public function removeWeatherData(WeatherData $weatherData): static
+    public function removeMeasurement(Measurement $measurement): static
     {
-        if ($this->weatherData->removeElement($weatherData)) {
+        if ($this->measurements->removeElement($measurement)) {
             // set the owning side to null (unless already changed)
-            if ($weatherData->getLocation() === $this) {
-                $weatherData->setLocation(null);
+            if ($measurement->getLocation() === $this) {
+                $measurement->setLocation(null);
             }
         }
 

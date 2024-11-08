@@ -3,31 +3,30 @@
 namespace App\Repository;
 
 use App\Entity\Location;
-use App\Entity\WeatherData;
+use App\Entity\Measurement;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<WeatherData>
+ * @extends ServiceEntityRepository<Measurement>
  *
- * @method WeatherData|null find($id, $lockMode = null, $lockVersion = null)
- * @method WeatherData|null findOneBy(array $criteria, array $orderBy = null)
- * @method WeatherData[]    findAll()
- * @method WeatherData[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Measurement|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Measurement|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Measurement[]    findAll()
+ * @method Measurement[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class WeatherDataRepository extends ServiceEntityRepository
+class MeasurementRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, WeatherData::class);
+        parent::__construct($registry, Measurement::class);
     }
-
     public function findByLocation(Location $location)
     {
         $qb = $this->createQueryBuilder('m');
         $qb->where('m.location = :location')
             ->setParameter('location', $location)
-            ->andWhere('m.measurementDate > :now')
+            ->andWhere('m.date > :now')
             ->setParameter('now', date('Y-m-d'));
 
         $query = $qb->getQuery();
@@ -35,26 +34,25 @@ class WeatherDataRepository extends ServiceEntityRepository
         return $result;
     }
 
-
 //    /**
-//     * @return WeatherData[] Returns an array of WeatherData objects
+//     * @return Measurement[] Returns an array of Measurement objects
 //     */
 //    public function findByExampleField($value): array
 //    {
-//        return $this->createQueryBuilder('w')
-//            ->andWhere('w.exampleField = :val')
+//        return $this->createQueryBuilder('m')
+//            ->andWhere('m.exampleField = :val')
 //            ->setParameter('val', $value)
-//            ->orderBy('w.id', 'ASC')
+//            ->orderBy('m.id', 'ASC')
 //            ->setMaxResults(10)
 //            ->getQuery()
 //            ->getResult()
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?WeatherData
+//    public function findOneBySomeField($value): ?Measurement
 //    {
-//        return $this->createQueryBuilder('w')
-//            ->andWhere('w.exampleField = :val')
+//        return $this->createQueryBuilder('m')
+//            ->andWhere('m.exampleField = :val')
 //            ->setParameter('val', $value)
 //            ->getQuery()
 //            ->getOneOrNullResult()
